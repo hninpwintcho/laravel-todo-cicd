@@ -1,0 +1,22 @@
+name: Deploy to Prob
+on:
+ push:
+  branches:
+   - master
+jobs:
+ deploy:
+   runs-on: ubuntu-latest
+   steps:
+    - name: Chekout
+      uses: action/checkout@v2
+    - name: Deploy to Server
+      uses: appleboy/ssh-action@v1.1.0
+      with: 
+        hosts: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: "cd /home/ubuntu/devops && ./deploy.sh"
+
+    
+   
+  
